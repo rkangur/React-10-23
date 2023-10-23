@@ -4,11 +4,20 @@ import Avaleht from './pages/Avaleht';
 import Ostukorv from './pages/Ostukorv';
 import LisaToode from './pages/LisaToode';
 import MitteLeitud from './pages/MitteLeitud';
+import { useState } from 'react';
 
 
 function App() {
+  const [stiil, uuendaStiil] = useState("hele");
+
   return (
-    <div className="App">
+    <div className={stiil}>
+      <button onClick={() => uuendaStiil("tume")}>
+        Tumedaks
+      </button> <br />
+      <button onClick={() => uuendaStiil("hele")}>
+        Heledaks
+      </button> <br />
 
       <Link to="/avaleht">
         <img className="pilt" src="https://estonia.ee/wp-content/uploads/nobe_netist_4.jpg" alt="auto" />

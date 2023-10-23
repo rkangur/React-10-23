@@ -1,5 +1,31 @@
 import React, { useState } from 'react'
 
+// tumesinine - JavaScriptis määratlus: function, const, let ja reserveeritud sõnad: false, true, undefined, null
+//              HTMLs: <div> <a> <p> <button> 
+// tavaline sinine - Javascriptis muutujad (oleme need ise loonud)
+//                   HTMLs muutujad (oleme need loonud JavaScriptis)
+// helesinine - JavaScriptis sissekirjutatud muutujad  console.log()  localStorage.getItem()
+//              HTMLs omadus (nt. inputilugeri omadus)
+// kollane - funktsioon, sulud käivad lõppu, mida on võimalik korduvalt välja kutsuda
+// oranž - jutumärkides sõnad
+// tumeroheline - kommentaar
+// heleroheline - numbrilised väärtused
+// valged - märgid, HTMLs väljanäidatav tekst
+// lillad - tegevused, import, export, return, if, else
+
+// loogelised sulud {} - JS koodiblokk function {} if {} else {}
+//                       HTML: JS ehk dünaamika koodiblokk
+//                       on useBLABLA ees kui muutujate arv on valikuline
+// tavalised sulud - funktsiooni väljakutse Avaleht () muudaKogus(5) if() <-- kontroll
+// kandilised sulud - useState juures, sellepärast et meil läheb TÄPSELT kahte vaja: mmuutujat ja funktsiooni
+// ; - semikoolon kui rea lõpetaja, pole kohustuslik aga suur osa ettevõtetest paneb kohustuslikuks
+// = väärtuse andja, = useState, disabeld={}, onClick={}
+// === - vasak ja parem pool on võrdsed
+// > < <= >= suurem, väiksem, väiksem võrdne, suurem võrdne
+// && - kui vasakpool on tõde. soos parem pool on nähtav
+// ! - keerab väärtust tagurpidi
+// () => funktsiooni tähis HTMLs kui tehakse onClick
+
 function Avaleht() {
     //vasakpoolne sõna läheb HTMLi loogeliste sulgude sisse
     // parempoolse sõna (funktsiooni) abil uuendatakse vasakpoolset ja HTMLi korraga
@@ -38,7 +64,7 @@ function Avaleht() {
         <button disabled={kogus === 0} onClick={() => nulli()}>Nulli</button>
         <br />
         {kogus > 0 && <button onClick={() => v2henda()}>-</button>}
-        <span> Kokku: {kogus} tk </span>
+        <span className={kogus >= 10 ? 'kuldne' : undefined}> Kokku: {kogus} tk </span>
         {<button onClick={() => suurenda()}>+</button>}
     </div>
   )
