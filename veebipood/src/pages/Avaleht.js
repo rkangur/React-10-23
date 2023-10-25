@@ -29,24 +29,27 @@ import React, { useState } from 'react'
 function Avaleht() {
     //vasakpoolne sõna läheb HTMLi loogeliste sulgude sisse
     // parempoolse sõna (funktsiooni) abil uuendatakse vasakpoolset ja HTMLi korraga
-    const [kogus, muudaKogus] = useState(7);
+    const [kogus, muudaKogus] = useState(localStorage.getItem("kogus") || 0);
     const [laigitud, uuendaLaigitud] = useState(false); 
     const [sonum, m22raSonum] = useState("Muuda kogust!");
 
     function nulli() {
         m22raSonum("Nullitud!");
         muudaKogus(0);
+        localStorage.setItem("kogus", 0)
     }
 
     function v2henda() {
         m22raSonum("Vähendatud!");
         muudaKogus(kogus - 1);
+        localStorage.setItem("kogus", kogus - 1)
     }
 
     function suurenda() {
         m22raSonum("Suurendatud!");
         muudaKogus(kogus + 1);
         // () => on onClick sees, siin ei pea
+        localStorage.setItem("kogus", kogus + 1)
     }
 
   return (
