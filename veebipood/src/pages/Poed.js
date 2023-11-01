@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import poedFailist from "../data/poed.json";
 
 // arraysid kohustulik kasutada kui toodete juures sorteerida/filtreerida
 
 function Poed() {
-    const [poed, muudaPoed] = useState(poedFailist);
+    const [poed, muudaPoed] = useState(poedFailist.slice());
+    const poodViide = useRef(); // viide <- tõlge referencist, mis on ref lühend
 
     const sorteeriAZ = () => {
         poed.sort();
@@ -47,7 +48,7 @@ function Poed() {
     }
 
     const originaali = () => {
-        muudaPoed(poedFailist);
+        muudaPoed(poedFailist.slice());
     }
 
     const filtreeriKellelOn9Tahte = () => {
@@ -70,10 +71,25 @@ function Poed() {
         muudaPoed(vastus);
     }
 
+    const lisa = () => {
+        poed.push(poodViide.current.value);
+        muudaPoed(poed.slice());
+    }
+
+    const kustuta = (index) => {
+        poed.splice(index, 1); // mitmendat, mitu tk
+        muudaPoed(poed.slice());
+    }
+
+    // render <-- HMTLi väljakuvamine
+    // re-render <-- HTMLi uuendamine (useState funktsiooni abil)
 
     return (
         <div>
-            <br /><br />
+
+            <label>Pood</label> <br />
+            <input ref={poodViide} type="text" /> <br /> <br />
+            <button onClick={lisa}>Lisa</button>
             <button onClick={originaali}>Tagasi originaali</button>
             <br /><br />
             <button onClick={sorteeriAZ}>Sorteeri A-Z</button>
@@ -90,7 +106,11 @@ function Poed() {
             <button onClick={filtreeriKellelOnVahemalt7Tahte}>Filtreeri kellel on vähemalt 7 tähte</button>
             <button onClick={filtreeriKellelOnRohkemKui1Sona}>Filtreeri kellel on rohkem kui 1 sõna</button>
             {/*kuvab listist ükshaaval välja*/}
-            { poed.map(yksPood => <div className='pood'>{yksPood}</div>)}
+            { poed.map((yksPood, index) => 
+                <div key={yksPood} className='pood'>
+                    {yksPood}
+                    <button onClick={() => kustuta(index)}>x</button>
+                </div>)}
 
         </div>
     )
