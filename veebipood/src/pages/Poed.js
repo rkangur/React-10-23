@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import poedFailist from "../data/poed.json";
+import { Link } from 'react-router-dom';
 
 // arraysid kohustulik kasutada kui toodete juures sorteerida/filtreerida
 
@@ -110,8 +111,11 @@ function Poed() {
                 <div key={yksPood} className='pood'>
                     {yksPood}
                     <button onClick={() => kustuta(index)}>x</button>
-                </div>)}
-
+                    <Link to={"/yksik-pood/" + index}>
+                        <button>Vaata detailsemalt</button>
+                    </Link>
+                </div>)
+            }
         </div>
     )
 }

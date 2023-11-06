@@ -9,6 +9,11 @@ import Seaded from './pages/Seaded';
 import Hinnad from './pages/Hinnad';
 import Tooted from './pages/Tooted';
 import Poed from './pages/Poed';
+import YksToode from './pages/YksToode';
+import MuudaToode from './pages/MuudaToode';
+import YksPood from './pages/YksPood';
+import HaldaTooted from './pages/HaldaTooted';
+
 
 
 function App() {
@@ -61,6 +66,10 @@ function App() {
         <button className="nupu-stiil">Lisa toode</button>
       </Link>
 
+      <Link to="/halda">
+        <button className="nupu-stiil">Muuda/kustuta tooteid</button>
+      </Link>
+
     <Routes>
       <Route path="avaleht" element={ <Avaleht /> } />
       <Route path="ostukorv" element={ <Ostukorv /> } />
@@ -69,10 +78,16 @@ function App() {
       <Route path="seaded" element={ <Seaded /> } />
       <Route path="hinnad" element={ <Hinnad /> } />
       <Route path="tooted" element={ <Tooted /> } />
+      <Route path="halda" element={ <HaldaTooted /> } />
+      <Route path="yksik-toode/:toote_indeks" element={ <YksToode /> } /> 
+      <Route path="yksik-pood/:poe_indeks" element={ <YksPood /> } />
+      <Route path="muuda-toode/:toote_jrknr" element={ <MuudaToode /> } />
       <Route path="poed" element={ <Poed /> } />
     </Routes>
     </div>
   );
 }
+
+// /: ütleb, et tegemist on muutuva kohaga
 
 export default App;

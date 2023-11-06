@@ -1,6 +1,7 @@
 import React from 'react';
 import tootedOstukorvis from "../data/ostukorv.json"; // juurde lisamiseks
 import tootedFailist from "../data/tooted.json"; // kuvab välja
+import { Link } from 'react-router-dom';
 
 function Tooted() {
   const tooted = tootedFailist;
@@ -15,7 +16,11 @@ function Tooted() {
         <div key={indeks}>
           {toode}
           <button onClick={() => lisaOstukorvi(toode)}>Lisa ostukorvi</button>
-        </div> )}
+          <Link to={"/yksik-toode/" + indeks}>
+            <button>Vaata detailsemalt</button>
+          </Link>
+        </div> )
+      }
     </div>
   )
 }
