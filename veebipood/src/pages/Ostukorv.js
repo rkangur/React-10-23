@@ -25,7 +25,9 @@ function Ostukorv() {
       { ostukorv.length > 0 && <div><button onClick={tyhjenda}>Tühjenda</button><div>Kokku {ostukorv.length} toode(t)</div> </div>}
         { ostukorv.map((toode, indeks) => 
           <div key={indeks}>
-            {toode} 
+            <img className='pilt' src={toode.pilt} alt=""/>
+            <div>{toode.nimi}</div>
+            <div>{toode.hind}</div>
             <button onClick={() => lisa(toode)} className='kuldne'>Lisa</button> 
             <button onClick={() => kustuta(indeks)} className='kuldne'>Kustuta</button> 
           </div>) }

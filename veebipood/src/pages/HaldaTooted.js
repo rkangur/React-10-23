@@ -21,8 +21,10 @@ function HaldaTooted() {
     return (
         <div>
             { tooted.map((yksToode, indeks) =>
-                <div>
-                {yksToode}
+                <div key={indeks}>
+                <div>{yksToode.nimi}</div>
+                <div>{yksToode.hind}</div>
+                <div>{yksToode.pilt}</div>
                 <button onClick={() => kustuta(indeks)}>Kustuta toode</button>
                 <Link to={"/muuda-toode/" + indeks}>
                     <button>Muuda</button>

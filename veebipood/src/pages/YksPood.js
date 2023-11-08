@@ -13,10 +13,10 @@ function YksPood() {
 
     return (
         <div>
-            <div>Poe nimi: { poe_indeks } </div>
-            <div>Järjekorranumber: { leitudPood }</div>
-            <div>Poe telefon: POE_TELEFON</div>
-            <div>Aadress: POE_AADRESS</div>
+            <div>Poe nimi: { poe_indeks }</div>
+            <div>Järjekorranumber: { leitudPood.nimi }</div>
+            <div>Poe telefon:  { leitudPood.tel }</div>
+            <div>Aadress:  { leitudPood.aadr }</div>
         </div>
     )
 }

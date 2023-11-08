@@ -1,8 +1,8 @@
 [
-    "Viimsi",
-    "Magistrali keskus",
-    "Kristiine",
-    "Ülemiste",
-    "Rocca al Mare",
-    "Järve"
+    {"nimi": "Viimsi", "aadr": "Tulika 77", "tel": "123123"},
+    {"nimi": "Magistrali keskus", "aadr": "Sõpruse pst 1", "tel": "11903"},
+    {"nimi": "Kristiine", "aadr": "Tulika 33", "tel": "18833"},
+    {"nimi": "Ülemiste", "aadr": "Nõmme tee 2", "tel": "123423"},
+    {"nimi": "Rocca Al Mare", "aadr": "Stroomi 29", "tel": "1223"},
+    {"nimi": "Järve", "aadr": "Järve 2", "tel": "123456789"}
 ]

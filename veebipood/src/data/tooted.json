@@ -1,5 +1,5 @@
 [
-    "BMW",
-    "Tesla",
-    "Nobe"
+    {"nimi": "BMW", "hind": "35000", "aktiivne": true, "pilt": "https://cdn.bmwblog.com/wp-content/uploads/2020/06/2021-BMW-M2-CS-Misano-Blue-95-1536x1024.jpg"},
+    {"nimi": "Tesla", "hind": "50000", "aktiivne": false, "pilt": "https://uberly.com/wp-content/uploads/2019/02/Tesla-Roadster-Can-it-Really-Drive-That-Fast.jpg"},
+    {"nimi": "Nobe", "hind": "3000", "aktiivne": true, "pilt": "https://s1.cdn.autoevolution.com/images/news/gallery/nobe-500-electric-pickup-truck-is-tiny-but-mighty-comes-with-an-eye-catching-retro-look_4.jpg"}
 ]

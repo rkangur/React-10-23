@@ -7,44 +7,46 @@ import { Link } from 'react-router-dom';
 function Poed() {
     const [poed, muudaPoed] = useState(poedFailist.slice());
     const poodViide = useRef(); // viide <- tõlge referencist, mis on ref lühend
+    const telViide = useRef();
+    const aadrViide = useRef();
 
     const sorteeriAZ = () => {
-        poed.sort();
+        poed.sort((a,b) => a.nimi.localeCompare(b.nimi));
         muudaPoed(poed.slice()); // slice kustutab ära mälukoha
     }
 
     const sorteeriZA = () => {
-        poed.sort((a,b) => b.localeCompare(a)); // võrdleb a ja b (sõnade võrdlemine)
+        poed.sort((a,b) => b.nimi.localeCompare(a.nimi)); // võrdleb a ja b (sõnade võrdlemine)
         muudaPoed(poed.slice()); // slice kustutab ära mälukoha
     }
 
     const sorteeriTahedKasvavalt = () => {
-        poed.sort((a,b) => a.length - b.length);
+        poed.sort((a,b) => a.nimi.length - b.nimi.length);
         muudaPoed(poed.slice());
     }
 
     const sorteeriTahedKahanevalt = () => {
-        poed.sort((a,b) => b.length - a.length);
+        poed.sort((a,b) => b.nimi.length - a.nimi.length);
         muudaPoed(poed.slice());
     }
 
     const sorteeribKolmandaTaheJargi = () => {
-        poed.sort((a,b) => a[2].localeCompare(b[2]));
+        poed.sort((a,b) => a.nimi[2].localeCompare(b.nimi[2]));
         muudaPoed(poed.slice());
     }
 
     const sorteeriSonadeArvuJargi = () => {
-        poed.sort((a,b) => a.split(" ").length - b.split(" ").length);
+        poed.sort((a,b) => a.nimi.split(" ").length - b.nimi.split(" ").length);
         muudaPoed(poed.slice());
     }
 
     const filtreeriKesSisaldabIsLyhendit = () => {
-        const vastus = poedFailist.filter(yksPood => yksPood.includes("is"));
+        const vastus = poedFailist.filter(yksPood => yksPood.nimi.includes("is"));
         muudaPoed(vastus);
     }
 
     const filtreeriEgaLoppevad = () => {
-        const vastus = poedFailist.filter(yksPood => yksPood.endsWith("e"));
+        const vastus = poedFailist.filter(yksPood => yksPood.nimi.endsWith("e"));
         muudaPoed(vastus);
     }
 
@@ -53,27 +55,38 @@ function Poed() {
     }
 
     const filtreeriKellelOn9Tahte = () => {
-        const vastus = poedFailist.filter(yksPood => yksPood.length === 9);
+        const vastus = poedFailist.filter(yksPood => yksPood.nimi.length === 9);
         muudaPoed(vastus);
     }
 
     const filtreeriKellelOnVahemalt7Tahte = () => {
-        const vastus = poedFailist.filter(yksPood => yksPood.length >= 7);
+        const vastus = poedFailist.filter(yksPood => yksPood.nimi.length >= 7);
         muudaPoed(vastus);
     }
 
     const filtreeriKellelOnKolmasTahtI = () => {
-        const vastus = poedFailist.filter(yksPood => yksPood[2] === "i");
+        const vastus = poedFailist.filter(yksPood => yksPood.nimi[2] === "i");
         muudaPoed(vastus);
     }
 
     const filtreeriKellelOnRohkemKui1Sona = () => {
-        const vastus = poedFailist.filter(yksPood => yksPood.split(" ").length > 1);
+        const vastus = poedFailist.filter(yksPood => yksPood.nimi.split(" ").length > 1);
         muudaPoed(vastus);
     }
 
+    // 1. Poed.js failis, lisa 2 labelit ja inputi juurde (aadress ja telefon)
+    // 2. Lisa 2 useRefi juurde mõlemale uuele inputile
+    // 3. Pushi objekt
+    // 4. Kui pushid, siis võtmete väärtused tulevad ref.current.value kaudu
+
+
     const lisa = () => {
-        poed.push(poodViide.current.value);
+        poed.push( {
+             "nimi": poodViide.current.value,
+             "aadr": aadrViide.current.value,
+              "tel": telViide.current.value
+            }
+        );
         muudaPoed(poed.slice());
     }
 
@@ -87,9 +100,13 @@ function Poed() {
 
     return (
         <div>
-
+            <div>{poed.length} tk</div> <br/>
             <label>Pood</label> <br />
             <input ref={poodViide} type="text" /> <br /> <br />
+            <label>Aadress</label> <br />
+            <input ref={aadrViide} type="text" /> <br /> <br />
+            <label>Telefon</label> <br />
+            <input ref={telViide} type="text" /> <br /> <br />
             <button onClick={lisa}>Lisa</button>
             <button onClick={originaali}>Tagasi originaali</button>
             <br /><br />
@@ -108,8 +125,8 @@ function Poed() {
             <button onClick={filtreeriKellelOnRohkemKui1Sona}>Filtreeri kellel on rohkem kui 1 sõna</button>
             {/*kuvab listist ükshaaval välja*/}
             { poed.map((yksPood, index) => 
-                <div key={yksPood} className='pood'>
-                    {yksPood}
+                <div key={yksPood.nimi} className='pood'>
+                    {yksPood.nimi}
                     <button onClick={() => kustuta(index)}>x</button>
                     <Link to={"/yksik-pood/" + index}>
                         <button>Vaata detailsemalt</button>
