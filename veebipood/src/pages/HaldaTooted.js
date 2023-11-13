@@ -21,7 +21,7 @@ function HaldaTooted() {
     return (
         <div>
             { tooted.map((yksToode, indeks) =>
-                <div key={indeks}>
+                <div key={indeks} className={yksToode.aktiivne === true ? "aktiivne-toode" : "mitteaktiivne-toode"}>
                 <div>{yksToode.nimi}</div>
                 <div>{yksToode.hind}</div>
                 <div>{yksToode.pilt}</div>

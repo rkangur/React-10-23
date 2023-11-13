@@ -20,6 +20,12 @@ function Ostukorv() {
     uuendaOstukorv(ostukorv.slice());
   }
 
+  const arvutaKogusumma = () => {
+    let summa = 0;
+    ostukorv.forEach(toode => summa += toode.hind);
+    return summa; 
+  }
+
   return (
     <div>
       { ostukorv.length > 0 && <div><button onClick={tyhjenda}>Tühjenda</button><div>Kokku {ostukorv.length} toode(t)</div> </div>}
@@ -35,6 +41,8 @@ function Ostukorv() {
         <Link to="/lisa-toode">
             <button>Lisa mõni toode ostukorvi</button>
         </Link>
+
+        <div>{arvutaKogusumma()} €</div>
 
     </div>
   )

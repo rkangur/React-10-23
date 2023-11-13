@@ -98,8 +98,15 @@ function Poed() {
     // render <-- HMTLi väljakuvamine
     // re-render <-- HTMLi uuendamine (useState funktsiooni abil)
 
+    const arvutaTahedKokku = () => {
+        let summa = 0;
+        poed.forEach(yksPood => summa = summa + yksPood.nimi.length);
+        return summa; 
+    }
+
     return (
         <div>
+            <div>{arvutaTahedKokku()}</div>
             <div>{poed.length} tk</div> <br/>
             <label>Pood</label> <br />
             <input ref={poodViide} type="text" /> <br /> <br />
