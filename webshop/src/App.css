@@ -122,4 +122,18 @@
   }
 }
 
+.lang {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+.lang:hover {
+  opacity: 70%;
+  cursor: pointer;
+}
+
+.lang:active {
+  padding: 1px;
+}
 
