@@ -16,7 +16,9 @@ const resources = {
       "nav.contact": "Contact us",
       "nav.cart": "Cart",
       "nav.login": "Log in",
-      "nav.signup": "Create user"
+      "nav.signup": "Create user",
+      "email": "E-mail",
+      "password": "Password"
     }
   },
   ee: {
@@ -30,7 +32,26 @@ const resources = {
         "nav.contact": "Kontakt",
         "nav.cart": "Ostukorv",
         "nav.login": "Logi sisse",
-        "nav.signup": "Registreeru"
+        "nav.signup": "Registreeru",
+        "email": "E-mail",
+        "password": "Parool"
+        
+    }
+  },
+  ru: {
+    translation: {
+        "admin.shops": "Смена магазинов",
+        "admin.categories": "Изменение категорий",
+        "admin.add-product": "Добавить товар",
+        "admin.edit-delete-products": "Редактировать/удалять товары",
+        "nav.shops": "Магазины",
+        "nav.admin": "Представление администратора",
+        "nav.contact": "Контакт",
+        "nav.cart": "Телега",
+        "nav.login": "Войти",
+        "nav.signup": "Регистрировать",
+        "email": "электронная почта",
+        "password": "пароль"
         
     }
   }

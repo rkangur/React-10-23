@@ -19,10 +19,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import NotFound from './pages/global/NotFound';
 import { useTranslation } from 'react-i18next';
 
-// 1. Tõlkige Login ja Signup labelid ja buttonid
-// 2. Lisage 3-4 keel Webshopi projekti --> i18n.js on vaja tekitada keeled ja uued nupud navbari
-// 3. Pange "Uudised" projektile peale ka tõlge ja Bootstrap
-
 function App() {
   const { t, i18n } = useTranslation();
 
@@ -34,6 +30,11 @@ function App() {
   const changeLangEe = () => {
     i18n.changeLanguage("ee");
     localStorage.setItem("language", "ee");
+  }
+
+  const changeLangRu = () => {
+    i18n.changeLanguage("ru");
+    localStorage.setItem("language", "ru");
   }
 
   return (
@@ -57,6 +58,7 @@ function App() {
               <Nav>
                 <img className='lang' src="/united-kingdom.png" onClick={changeLangEn} alt="" />
                 <img className='lang' src="/estonia.png" onClick={changeLangEe} alt="" />
+                <img className='lang' src="/russian.png" onClick={changeLangRu} alt="" />
                 {/*<button onClick={() => i18n.changeLanguage("ee")}>est</button>*/}
                 
                 <Nav.Link as={Link} to="/login">{t("nav.login")}</Nav.Link>
