@@ -2,7 +2,7 @@ import './App.css';
 import { Link, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/global/HomePage';
 import Cart from './pages/global/Cart';
-import ContactUs from './pages/global/ContactUs';
+import { ContactUs } from './pages/global/ContactUs';
 import Shops from './pages/global/Shops';
 import SingleProduct from './pages/global/SingleProduct';
 import AdminHome from './pages/admin/AdminHome';
@@ -16,7 +16,7 @@ import AddProduct from './pages/admin/AddProduct';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NotFound from './pages/global/NotFound';
+import { NotFound, NotFound2} from './pages/global/NotFound';
 import { useTranslation } from 'react-i18next';
 
 // 1. Pange Firebase üles
@@ -85,7 +85,7 @@ function App() {
           <Route path="cart" element={ <Cart />} />
           <Route path="contact" element={ <ContactUs />} />
           <Route path="shops" element={ <Shops />} />
-          <Route path="product" element={ <SingleProduct />} />
+          <Route path="product/:product_id" element={ <SingleProduct />} />
           <Route path="admin" element={ <AdminHome />} />
           <Route path="admin/add" element={ <AddProduct />} />
           <Route path="admin/edit/:product_id" element={ <EditProduct />} />

@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../App.css';
 
-function NotFound() {
+export const  NotFound = () => {
   return (
     <div>
       <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
@@ -10,4 +10,12 @@ function NotFound() {
   )
 }
 
-export default NotFound
+// default - võta kõik, ilma - võta tk-na NB! impordile {} ümber kui tk-na
+export const  NotFound2 = () => {
+  return (
+    <div>
+      <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div>Ei leitud!</div>
+    </div>
+  )
+}

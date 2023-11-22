@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import productsFromFile from '../../data/products.json'
+import { Link } from 'react-router-dom'
 
 function HomePage() {
   const [products, setProducts] = useState(productsFromFile);
@@ -47,7 +48,9 @@ function HomePage() {
         {/* <div>{product.description}</div> */}
         {/* <div>{product.category}</div> */}
         {/* <div>{product.active}</div> */}
-        <button>Lisa ostukorvi</button>
+        <Link to={"/product/" + product.id}>
+          <button>Lisa ostukorvi</button>
+        </Link>
       </div>)}
     </div>
   )
