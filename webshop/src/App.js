@@ -19,6 +19,18 @@ import Navbar from 'react-bootstrap/Navbar';
 import NotFound from './pages/global/NotFound';
 import { useTranslation } from 'react-i18next';
 
+// 1. Pange Firebase üles
+// 2. SingleProduct vastavalt kommentaaridele
+// 3. AddProduct vastavalt kommentaaridele
+// 4. MaintainProducts failis kustutamine
+// 5. HomePages sorteerimised:
+//         nimi A-Z ja Z-A
+//         hind kasvavalt ja kahanevalt
+// 6. Ostukorvi lisamine HomePagest cart.json faili
+// 7. Cart lehe tegemine
+// 8. Filtreerimine HomePage lehel category järgi
+// näidake mitu toodet on avalehel nähtavad
+
 function App() {
   const { t, i18n } = useTranslation();
 
@@ -76,7 +88,7 @@ function App() {
           <Route path="product" element={ <SingleProduct />} />
           <Route path="admin" element={ <AdminHome />} />
           <Route path="admin/add" element={ <AddProduct />} />
-          <Route path="admin/edit" element={ <EditProduct />} />
+          <Route path="admin/edit/:product_id" element={ <EditProduct />} />
           <Route path="admin/categories" element={ <MaintainCategories/>} />
           <Route path="admin/products" element={ <MaintainProducts />} />
           <Route path="admin/shops" element={ <MaintainShops />} />
