@@ -1,23 +1,9 @@
 import React from 'react'
+import { useRef, useState } from 'react'
+import productsFromFile from '../../data/products.json'
+import { useTranslation } from 'react-i18next'
+import { ToastContainer, toast } from 'react-toastify'
 
-// 1. Suunake HomePage lehelt SingleProduct URL-le, saates kaasa ID
-// 2. App.js sees võimaldage panna ID URLi sisse
-// 3. SingleProductis võtke selle saadetud ID
-// 4. Otsige selle ID alusel toode üles
-// 4a. Importisime kõik tooted
-// 5. Muutke see saadud ID numbriks, sest URLst tulevad ainult sõnad
-// 6. Kui ei leitud, siis tehke varajane return
-// 7. Kuvage välja HTMLs see leitud toote (kui leiti ehk läks varajasest returnist üle)
-// Vaadake nii EditProducti kui ka eesti keelset projekti
-// 8. Tegime 7 erinevat labelit ja inputi
-// 9. Tegime 7 erinevat useRefi, mille panime ükshaaval inputi sisse
-// 10. Tegime nupu, mille sidusime ära funktsiooniga
-// 11. Kõikide toodete hulgast muutsime seda toodet, 
-//          vastavalt mis oli refide current valuede sees
-// 12. HTMLs numbritele type "number" ja funktsioonis numbritele Number(), 
-//        booleanitele checked
-
-// KODUS:
 // 8. Tehke 7 erinevat labelit ja inputi
 // 9. Tehke 7 erinevat useRefi, mille panime ükshaaval inputi sisse
 // 10. Tehke nupp, mis siduge ära funktsiooniga
@@ -28,8 +14,69 @@ import React from 'react'
 // Vaadake nii EditProducti kui ka eesti keelset projekti
 
 function AddProduct() {
+  const idRef = useRef();
+  const nameRef = useRef();
+  const priceRef = useRef();
+  const imageRef = useRef();
+  const categoryRef = useRef();
+  const descriptionRef = useRef();
+  const activeRef = useRef();
+  const [idUnique, setIdUnique] = useState(true);
+  const { t } = useTranslation();
+  
+  const addProduct = () => {
+    // refreshiga tuleb tagasi
+    // mine vaata kas avalehele, kas on lisatud (peab lisama faili, mitte products usestate muutujasse)
+
+    if (idRef.current.value === "") {
+      toast.error("ID pole täidetud!");
+      return;
+    }
+
+    productsFromFile.push( {
+      "id": Number(idRef.current.value),
+      "image": imageRef.current.value,
+      "name": nameRef.current.value,
+      "price": Number(priceRef.current.value),
+      "description": descriptionRef.current.value,
+      "category": categoryRef.current.value,
+      "active": activeRef.current.value.checked
+    });
+    toast("Toode lisatud!");
+  }
+
+  const checkIdUniqueness = () => {
+    // siin sees kontrollime, kas kellegil on selline ID olemas nagu idRef.current.value sees
+    const result = productsFromFile.find(product => product.id === Number(idRef.current.value));
+
+    if (result === undefined) {
+      setIdUnique(true);
+    } else {
+      setIdUnique(false);
+    }
+  }
+  
   return (
-    <div>AddProduct</div>
+    <div>
+      { idUnique === false && <div>Sistestatud ID ei ole unikaalne!</div>}
+      <label>ID</label> <br />
+      <input ref={idRef} onChange={checkIdUniqueness} type="number"></input> <br />
+      <label>{t("name")}</label> <br />
+      <input ref={nameRef} type="text"></input> <br />
+      <label>{t("price")}</label> <br />
+      <input ref={priceRef} type="number"></input> <br />
+      <label>{t("image")}</label> <br />
+      <input ref={imageRef} type="text"></input> <br />
+      <label>{t("category")}</label> <br />
+      <input ref={categoryRef} type="text"></input> <br />
+      <label>{t("description")}</label> <br />
+      <input ref={descriptionRef} type="text"></input> <br />
+      <label>{t("active")}</label> <br />
+      <input ref={activeRef} type="checkbox"></input> <br />
+      <button disabled={idUnique === false} onClick={() => addProduct()}>{t("add")}</button>
+
+      <ToastContainer />
+    </div>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import productsFromFile from '../../data/products.json'
 
 // 1. Suunake HomePage lehelt SingleProduct URL-le, saates kaasa ID
@@ -19,22 +19,7 @@ function SingleProduct() {
   const nameRef = useRef();
   const priceRef = useRef();
   const imageRef = useRef();
-  const categoryRef = useRef();
-  const descriptionRef = useRef();
-  const activeRef = useRef();
   
-  const edit = () => {
-    const index = productsFromFile.findIndex(product => product.id === Number(product_id));
-    productsFromFile[index] = {
-      "id": Number(idRef.current.value),
-      "image": imageRef.current.value,
-      "name": nameRef.current.value,
-      "price": Number(priceRef.current.value),
-      "description": descriptionRef.current.value,
-      "category": categoryRef.current.value,
-      "active": activeRef.current.value.checked
-    }
-  }
 
   if (found === undefined) {
     return <div>Ei leitud</div>
@@ -42,18 +27,10 @@ function SingleProduct() {
 
   return (
     <div>
-      <label>ID</label> <br />
-      <input ref={idRef} type="number" defaultValue={found.id}></input> <br />
-      <label>Name</label> <br />
-      <input ref={nameRef} type="text" defaultValue={found.name}></input> <br />
-      <label>Price</label> <br />
-      <input ref={priceRef} type="number" defaultValue={found.price}></input> <br />
-      <label>Image</label> <br />
-      <input ref={imageRef} type="text" defaultValue={found.image}></input> <br />
-      <label>Categroy</label> <br />
-      <input ref={categoryRef} type="text" defaultValue={found.category}></input> <br />
-      <label>Description</label> <br />
-      <input ref={descriptionRef} type="text" defaultValue={found.description}></input> <br />
+      <div ref={idRef} type="number">Product id: {found.id}</div> <br />
+      <div ref={nameRef} type="text">Product name: {found.name}</div> <br />
+      <div ref={priceRef} type="number">Price: {found.price}</div> <br />
+      <img ref={imageRef} src={found.image} alt=""/> <br />
     </div>
     )
   }

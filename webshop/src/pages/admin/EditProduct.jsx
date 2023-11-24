@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import productsFromFile from '../../data/products.json'
 import { ToastContainer, toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next';
 
 // 1. Suunasime MaintainProducts lehelt EditProduct URL-le, saates kaasa ID
 // 2. App.js sees võimaldasime panna ID URLi sisse
@@ -23,6 +24,7 @@ function EditProduct() {
   const activeRef = useRef();
   const navigate = useNavigate();
   const [idUnique, setIdUnique] = useState(true);
+  const { t } = useTranslation();
   
   
   const edit = () => {
@@ -86,19 +88,19 @@ function EditProduct() {
       { idUnique === false && <div>Sistestatud ID ei ole unikaalne!</div>}
       <label>ID</label> <br />
       <input ref={idRef} onChange={checkIdUniqueness} type="number" defaultValue={found.id}></input> <br />
-      <label>Name</label> <br />
+      <label>{t("name")}</label> <br />
       <input ref={nameRef} type="text" defaultValue={found.name}></input> <br />
-      <label>Price</label> <br />
+      <label>{t("price")}</label> <br />
       <input ref={priceRef} type="number" defaultValue={found.price}></input> <br />
-      <label>Image</label> <br />
+      <label>{t("image")}</label> <br />
       <input ref={imageRef} type="text" defaultValue={found.image}></input> <br />
-      <label>Categroy</label> <br />
+      <label>{t("category")}</label> <br />
       <input ref={categoryRef} type="text" defaultValue={found.category}></input> <br />
-      <label>Description</label> <br />
+      <label>{t("description")}</label> <br />
       <input ref={descriptionRef} type="text" defaultValue={found.description}></input> <br />
-      <label>Active</label> <br />
+      <label>{t("active")}</label> <br />
       <input ref={activeRef} type="checkbox" defaultChecked={found.active}></input> <br />
-      <button disabled={idUnique === false} onClick={edit}>Muuda</button>
+      <button disabled={idUnique === false} onClick={() => edit()}>{t("change")}</button>
       
       <ToastContainer 
       theme="dark"

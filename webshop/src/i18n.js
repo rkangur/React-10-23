@@ -18,7 +18,15 @@ const resources = {
       "nav.login": "Log in",
       "nav.signup": "Create user",
       "email": "E-mail",
-      "password": "Password"
+      "password": "Password",
+      "change" : "Change",
+      "add" : "Add",
+      "name" : "Name",
+      "price" : "Price",
+      "category" : "Category",
+      "image" : "Image",
+      "description" : "Description",
+      "active" : "Active"
     }
   },
   ee: {
@@ -34,8 +42,15 @@ const resources = {
         "nav.login": "Logi sisse",
         "nav.signup": "Registreeru",
         "email": "E-mail",
-        "password": "Parool"
-        
+        "password": "Parool",
+        "change" : "Muuda",
+        "add" : "Lisa",
+        "name" : "Nimi",
+        "price" : "Hind",
+        "category" : "Kategooria",
+        "image" : "Pilt",
+        "description" : "Kirjeldus",
+        "active" : "Aktiivne"
     }
   },
   ru: {

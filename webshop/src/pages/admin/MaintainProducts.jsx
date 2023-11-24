@@ -1,15 +1,17 @@
 import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import productsFromFile from '../../data/products.json'
-import { Link } from 'react-router-dom';
+
 
 function MaintainProducts() {
   const [products, setProducts] = useState(productsFromFile);
   const searchedRef = useRef();
 
-  const deleteProduct = () => {
-    // KODUS
+  const deleteProduct = (index) => {
     // refreshiga tuleb tagasi
-    // mine vaata kas avalehele, kas on kustunud (peab kustutama failist, mitte products usestate muutujast)
+    // mine vaata avalehele, kas on kustunud (peab kustutama failist, mitte products usestate muutujast)
+    productsFromFile.splice(index, 1);
+    setProducts(productsFromFile.slice());
   }
 
   const searchFromProducts = () => {
@@ -20,9 +22,10 @@ function MaintainProducts() {
   return (
     <div>
       <div>{products.length} tk</div>
+      <label>Search from products:</label>
       <input ref={searchedRef} onChange={searchFromProducts} type="text" />
-      {products.map(product => 
-      <div key={product.id} className={product.active ? "active" : "inactive" }>
+      {products.map((product, index) => 
+      <div key={product.id}>
         <img src={product.image} alt="" />
         <div>{product.id}</div>
         <div>{product.name}</div>
@@ -30,7 +33,7 @@ function MaintainProducts() {
         <div>{product.description}</div>
         <div>{product.category}</div>
         <div>{product.active + 0}</div>
-        <button onClick={deleteProduct}>X</button>
+        <button onClick={() => deleteProduct(index)}>X</button>
         <Link to={"/admin/edit/" + product.id}>
           <button>Muuda</button>
         </Link>
