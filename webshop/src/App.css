@@ -149,6 +149,11 @@
 }
 
 .inactive {
-border: 1px solid red;
-background-color: white;
+  border: 1px solid red;
+  background-color: white;
+}
+
+.chartImage {
+  height: 200px;
+  width: 200px;
 }
