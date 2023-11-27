@@ -4,14 +4,6 @@ import productsFromFile from '../../data/products.json'
 import { ToastContainer, toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next';
 
-// 1. Suunasime MaintainProducts lehelt EditProduct URL-le, saates kaasa ID
-// 2. App.js sees võimaldasime panna ID URLi sisse
-// 3. EditProductis võtsime selle saadetud ID
-// 4. Otsisime selle ID alusel toote üles
-// 5. Muutsime selle saadud ID numbriks, sest URLst tulevad ainult sõnad
-// 6. Kui ei leitud, siis tegime varajase returni
-// 7. Kuvasime välja HTMLs selle leitud toote (kui leiti ehk läks varajasest returnist üle)
-
 function EditProduct() {
   const { product_id } = useParams();
   const found = productsFromFile.find(product => product.id === Number(product_id));
@@ -68,7 +60,6 @@ function EditProduct() {
   }
 
   const checkIdUniqueness = () => {
-    // siin sees kontrollime, kas kellegil on selline ID olemas nagu idRef.current.value sees
     const result = productsFromFile.find(product => product.id === Number(idRef.current.value));
 
     if (result === undefined) {
@@ -78,7 +69,6 @@ function EditProduct() {
     }
   }
 
-    // URL-is sõne kujul, seetõttu võrdust ei toimu
   if (found === undefined) {
     return <div>Ei leitud</div>
   }

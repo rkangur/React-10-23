@@ -1,7 +1,16 @@
 import React, { useState } from 'react'
 import productsFromFile from '../../data/products.json'
-import productsCartFile from '../../data/cart.json'
+// import productsCartFile from '../../data/cart.json'
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+
+// 27.11 localStorage-sse massiiv (array) ---> KOJU palju faile
+// 29.11 objekt ostukorvis ---> kogused ostukorvis iga toote juures
+//       kujundus ostukorvis
+// 02.12 API päringud -> pakiautomaatide võtmine ---> KOJU mõni fail
+// 06.12 andmebaasi kõik meie kategooriad, tooted, poed jne... ---> Nortali proovitöö
+// 11.12 Alamkomponendid, Context, proovitöö vaatlus ---> veel mõned proovitööd
+// 21.12 Lõpuprojekti esitlemine 
 
 function HomePage() {
   const [products, setProducts] = useState(productsFromFile);
@@ -27,30 +36,32 @@ function HomePage() {
   }
 
   const addToCart = (product) => {
-    productsCartFile.push(
-      {
-      "id": product.id,
-      "image": product.image,
-      "name": product.name,
-      "price": product.price,
-      "description": product.description,
-      "category": product.category,
-      "active": product.active
-    });
+    // NB! LocalStorage'st tuleb alati sõne sp JSON.parse muudab array-ks
+    // JSON.parse võtab jutumärgid ära: "[{},{}]" ---> [{},{}]
+    const cartFromLS = JSON.parse(localStorage.getItem("cart")) || [];
+    cartFromLS.push(product);
+    localStorage.setItem("cart", JSON.stringify(cartFromLS));
+
+    // localStorage-sse pannes:
+    // 1. võtta localStorage-st:   localStorage.getItem(VÕTI) || []
+    // 2. võtta jutumärgid maha:   JSON.parse()
+    // 3. lisada localStorage-st võetule üks juurde:    .push(UUS_ASI)
+    // 4. panna jutumärgid tagasi: JSON.stringify()
+    // 5. panna localStorage-sse tagasi:   localStorage.setItem(VÕTI, UUS_VÄÄRTUS)
   }
 
   const filterByFigure = () => {
-    const result = productsFromFile.filter(product => product.category === "figure");
+    const result = productsFromFile.filter(product => product.category.toLowerCase() === "figure");
     setProducts(result);
   }
 
   const filterByLego = () => {
-    const result = productsFromFile.filter(product => product.category === "lego");
+    const result = productsFromFile.filter(product => product.category.toLowerCase() === "lego");
     setProducts(result);
   }
 
   const filterByStarWars = () => {
-    const result = productsFromFile.filter(product => product.category === "star wars");
+    const result = productsFromFile.filter(product => product.category.toLowerCase() === "star wars");
     setProducts(result);
   }
 
@@ -72,13 +83,12 @@ function HomePage() {
         <div>{product.id}</div>
         <div>{product.name}</div>
         <div>{product.price}</div>
-        {/* <div>{product.description}</div> */}
-        {/* <div>{product.category}</div> */}
-        {/* <div>{product.active}</div> */}
+       
         <Link to={"/product/" + product.id}>
-          <button>Vaata lähemalt</button>
+          <Button variant="outlined" >Vaata lähemalt</Button>
         </Link>
-        <button onClick={() => addToCart(product)}>Lisa ostukorvi</button>
+
+        <Button variant="contained" onClick={() => addToCart(product)}>Lisa ostukorvi</Button>
       </div>)}
     </div>
   )

@@ -25,9 +25,7 @@ function AddProduct() {
   const { t } = useTranslation();
   
   const addProduct = () => {
-    // refreshiga tuleb tagasi
-    // mine vaata kas avalehele, kas on lisatud (peab lisama faili, mitte products usestate muutujasse)
-
+   
     if (idRef.current.value === "") {
       toast.error("ID pole täidetud!");
       return;
@@ -43,6 +41,14 @@ function AddProduct() {
       "active": activeRef.current.value.checked
     });
     toast("Toode lisatud!");
+
+    idRef.current.value = "";
+    imageRef.current.value = "";
+    nameRef.current.value = "";
+    priceRef.current.value = "";
+    descriptionRef.current.value = "";
+    categoryRef.current.value = "";
+    activeRef.current.checked = false;
   }
 
   const checkIdUniqueness = () => {

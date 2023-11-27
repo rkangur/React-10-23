@@ -8,8 +8,6 @@ function MaintainProducts() {
   const searchedRef = useRef();
 
   const deleteProduct = (index) => {
-    // refreshiga tuleb tagasi
-    // mine vaata avalehele, kas on kustunud (peab kustutama failist, mitte products usestate muutujast)
     productsFromFile.splice(index, 1);
     setProducts(productsFromFile.slice());
   }
