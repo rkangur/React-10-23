@@ -39,7 +39,14 @@ function HomePage() {
     // NB! LocalStorage'st tuleb alati sõne sp JSON.parse muudab array-ks
     // JSON.parse võtab jutumärgid ära: "[{},{}]" ---> [{},{}]
     const cartFromLS = JSON.parse(localStorage.getItem("cart")) || [];
-    cartFromLS.push(product);
+    const index = cartFromLS.findIndex(cartProduct => cartProduct.toode.id === product.id);
+
+    // kui ei leita, on jrk nr -1
+    if (index >= 0) {
+      cartFromLS[index].kogus += 1;
+    } else {
+      cartFromLS.push({"kogus": 1, "toode": product});
+    }
     localStorage.setItem("cart", JSON.stringify(cartFromLS));
 
     // localStorage-sse pannes:

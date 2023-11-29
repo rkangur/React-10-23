@@ -1,8 +1,24 @@
 import React, { useState } from 'react'
 // import productsCartFile from '../../data/cart.json'
+import "../../css/Cart.css";
 
 function Cart() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+
+  const decreaseQuantity = (index) => {
+    cart[index].kogus -= 1;
+    if (cart[index].kogus === 0) {
+      cart.splice(index, 1);
+    }
+    setCart(cart.slice());
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+  
+  const increaseQuantity = (index) => {
+    cart[index].kogus += 1;
+    setCart(cart.slice());
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 
   const removeFromCart = (index) => {
     cart.splice(index, 1);
@@ -10,35 +26,41 @@ function Cart() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
+  const calculateCartSum = () => {
+    let sum = 0;
+    cart.forEach(product => {
+      sum += product.toode.price * product.kogus;
+    })
+    return sum.toFixed(2);
+  }
+
   const emptyCart = () => {
     cart.splice(0);
     setCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
-  }
-
-  const calculateCartSum = () => {
-    let sum = 0;
-    cart.forEach(product => {
-      sum += product.price;
-    })
-    return sum.toFixed(2);
   }
   
   return (
     <div>
       <div>Ostukorvis olevate toodete arv: {cart.length} </div>
        {cart.map((product, index) => 
-      <div key={product.id}>
-        <img src={product.image} alt="" />
+      <div className="product" key={product.toode.id}>
+        <img className="image" src={product.toode.image} alt="" />
         {/* <div>{product.id}</div> */}
-        <div>{product.name}</div>
-        <div>{product.price}</div>
-        <button onClick={() => removeFromCart(index)}>X</button>
+        <div className="name">{product.toode.name}</div>
+        <div className="price">{product.toode.price.toFixed(2)} €</div>
+        <div className="quantity">
+          <img className="button" src="/minus.png" alt="" onClick={() => decreaseQuantity(index)} />
+          <div>{product.kogus} tk</div>
+          <img className="button" src="/plus.png" alt="" onClick={() => increaseQuantity(index)}/>
+        </div>
+        <div className="total">{(product.toode.price * product.kogus).toFixed(2)} tk</div>
+        <img className="button" src="/cross.png" alt="" onClick={() => removeFromCart(index)}/>
       </div>)}
         { cart.length === 0 ? <img className="chartImage" src="empty.png" alt="The cart is empty!" /> :
          <div> 
           <div>Kokku: {calculateCartSum()} € </div> 
-          <button onClick={() => emptyCart()}>Tühjenda ostukorv</button>
+          <button className="button2" onClick={() => emptyCart()}>Tühjenda ostukorv</button>
         </div> }
     </div>
     )

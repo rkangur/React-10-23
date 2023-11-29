@@ -1,0 +1,57 @@
+.product {
+    /*paneb asjad vasakult paremale*/
+    display: flex;
+    /*ruumi paigutamiseks*/
+    justify-content: space-between;
+    /* 0 on ülevale ja alla, 10% lehe äärest vahe; padding tõukab äärest sisse poole, margin välja poole*/
+    margin: 0 10%;
+    border-bottom: 1px solid lightblue;
+    padding: 10px 0;
+}
+
+.image {
+    width: 100px; 
+}
+
+.name {
+    width: 150px; 
+}
+
+.price {
+    width: 70px; 
+}
+
+.quantity {
+    display: flex;
+    justify-content: space-between;
+    width: 120px; 
+    height: 40px;
+    padding: 5px;
+    border: 1px solid rgb(73, 129, 148);
+    border-radius: 20px;
+}
+
+.total {
+    width: 70px; 
+}
+
+.button {
+    width: 30px;
+    height: 30px;
+}
+
+.button2 {
+    width: 100px;
+    height: 60px;
+    background-color: rgb(217, 181, 252);
+    border-radius: 20px;
+}
+
+.button:hover {
+    cursor: pointer;
+    opacity: 0,7;
+}
+
+.button:active {
+    padding: 1px;
+}
