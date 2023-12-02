@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import productsCartFile from '../../data/cart.json'
 import "../../css/Cart.css";
 
 function Cart() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+  const [parcelMachines, setParchelMachines] = useState([]);
+
+  // uef - lehele tulles tehakse koheselt API päring (1x)
+  // esimene response võtab kogu tagastuse, mis järgmise reale sisendiks (set uuendab 1x HTML lehte)
+  useEffect(() => {
+    fetch('https://www.omniva.ee/locations.json')
+      .then(response => response.json())
+      .then(json => setParchelMachines(json))
+  }, []);
 
   const decreaseQuantity = (index) => {
     cart[index].kogus -= 1;
@@ -61,7 +70,13 @@ function Cart() {
          <div> 
           <div>Kokku: {calculateCartSum()} € </div> 
           <button className="button2" onClick={() => emptyCart()}>Tühjenda ostukorv</button>
-        </div> }
+        </div> } <br />
+
+        <div>Vali pakiautomaat:</div>
+        <select>{parcelMachines
+                    .filter(pm => pm.NAME !== "1. eelistus/Picapac pakiautomaat")
+                    .filter(pm => pm.A0_NAME === "EE")
+                    .map(pm => <option key={pm.NAME}>{pm.NAME}</option>)}</select>
     </div>
     )
 }

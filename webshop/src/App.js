@@ -13,6 +13,7 @@ import MaintainShops from './pages/admin/MaintainShops';
 import Login from './pages/auth/Login';
 import SignUp from './pages/auth/SignUp';
 import AddProduct from './pages/admin/AddProduct';
+import Supplier from './pages/admin/Supplier';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -91,6 +92,7 @@ function App() {
           <Route path="admin/edit/:product_id" element={ <EditProduct />} />
           <Route path="admin/categories" element={ <MaintainCategories/>} />
           <Route path="admin/products" element={ <MaintainProducts />} />
+          <Route path="admin/supplier" element={ <Supplier />} />
           <Route path="admin/shops" element={ <MaintainShops />} />
           <Route path="login" element={ <Login />} />
           <Route path="signup" element={ <SignUp />} />

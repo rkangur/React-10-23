@@ -1,19 +1,28 @@
-import React, { useState } from 'react'
-import productsFromFile from '../../data/products.json'
-// import productsCartFile from '../../data/cart.json'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import '../../css/HomePage.css';
 
 // 27.11 localStorage-sse massiiv (array) ---> KOJU palju faile
 // 29.11 objekt ostukorvis ---> kogused ostukorvis iga toote juures
 //       kujundus ostukorvis
 // 02.12 API päringud -> pakiautomaatide võtmine ---> KOJU mõni fail
 // 06.12 andmebaasi kõik meie kategooriad, tooted, poed jne... ---> Nortali proovitöö
-// 11.12 Alamkomponendid, Context, proovitöö vaatlus ---> veel mõned proovitööd
-// 21.12 Lõpuprojekti esitlemine 
+// 17.12 Alamkomponendid, CSS moodulid, Context, proovitöö vaatlus ---> veel mõned proovitööd
+// 21.12 Lõpuprojekti esitlemine 1.5h
 
 function HomePage() {
-  const [products, setProducts] = useState(productsFromFile);
+  const [products, setProducts] = useState([]); // Kõikuvas seisundis (HTMLs)
+  const [dbProducts, setDbProducts] = useState([]); // ALATI ORIGINAALSED TOOTED 481tk
+
+  useEffect(() => {
+    fetch("https://rahel-react-veebipood-10-2023-default-rtdb.europe-west1.firebasedatabase.app/products.json")
+      .then(res => res.json())
+      .then(json => {
+        setProducts(json);
+        setDbProducts(json);
+      })
+  }, []);
 
   const sortAZ = () => {
     products.sort((a, b) => a.name.localeCompare(b.name));
@@ -58,17 +67,17 @@ function HomePage() {
   }
 
   const filterByFigure = () => {
-    const result = productsFromFile.filter(product => product.category.toLowerCase() === "figure");
+    const result = dbProducts.filter(product => product.category.toLowerCase() === "figure");
     setProducts(result);
   }
 
   const filterByLego = () => {
-    const result = productsFromFile.filter(product => product.category.toLowerCase() === "lego");
+    const result = dbProducts.filter(product => product.category.toLowerCase() === "lego");
     setProducts(result);
   }
 
   const filterByStarWars = () => {
-    const result = productsFromFile.filter(product => product.category.toLowerCase() === "star wars");
+    const result = dbProducts.filter(product => product.category.toLowerCase() === "star wars");
     setProducts(result);
   }
 
@@ -84,19 +93,21 @@ function HomePage() {
       <button onClick={filterByLego}>Filtreeri "Lego" tooted</button>
       <button onClick={filterByStarWars}>Filtreeri "StarWars" tooted</button>
 
-      {products.map((product, index) => 
-      <div key={product.id}>
-        <img src={product.image} alt="" />
-        <div>{product.id}</div>
-        <div>{product.name}</div>
-        <div>{product.price}</div>
-       
-        <Link to={"/product/" + product.id}>
-          <Button variant="outlined" >Vaata lähemalt</Button>
-        </Link>
+      <div className='products'>
+        {products.map((product, index) => 
+        <div key={product.id} className='home-product'>
+          <img className='home-image' src={product.image} alt="" />
+          <div>{product.id}</div>
+          <div className='home-productName'>{product.name}</div>
+          <div>{product.price}</div>
+        
+          <Link to={"/product/" + product.id}>
+            <Button variant="outlined" >Vaata lähemalt</Button>
+          </Link>
 
-        <Button variant="contained" onClick={() => addToCart(product)}>Lisa ostukorvi</Button>
-      </div>)}
+          <Button variant="contained" onClick={() => addToCart(product)}>Lisa ostukorvi</Button>
+        </div>)}
+      </div>
     </div>
   )
 }
