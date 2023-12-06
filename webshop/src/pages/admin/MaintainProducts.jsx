@@ -1,20 +1,40 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
-import productsFromFile from '../../data/products.json'
+//import productsFromFile from '../../data/products.json'
 
 
 function MaintainProducts() {
-  const [products, setProducts] = useState(productsFromFile);
   const searchedRef = useRef();
+  const [products, setProducts] = useState([]); // Kõikuvas seisundis (HTMLs)
+  const [dbProducts, setDbProducts] = useState([]); // ALATI ORIGINAALSED TOOTED 481tk
+  const url = "https://rahel-react-veebipood-10-2023-default-rtdb.europe-west1.firebasedatabase.app/products.json"; 
+
+  useEffect(() => {
+    fetch(url)
+      .then(res => res.json())
+      .then(json => {
+        setProducts(json);
+        setDbProducts(json);
+      })
+  }, []);
 
   const deleteProduct = (index) => {
-    productsFromFile.splice(index, 1);
-    setProducts(productsFromFile.slice());
+    dbProducts.splice(index, 1);
+    fetch(url, {"method": "PUT", "body": JSON.stringify(products)});
+    setProducts(dbProducts.slice());
   }
 
   const searchFromProducts = () => {
-    const result = productsFromFile.filter(product => product.name.toLowerCase().includes(searchedRef.current.value.toLowerCase()) );
+    const result = dbProducts.filter(product => 
+      product.name
+        .toLowerCase()
+        .includes(searchedRef.current.value.toLowerCase()) );
     setProducts(result);
+  }
+
+  if (dbProducts.length === 0){
+    return <Spinner />
   }
 
   return (

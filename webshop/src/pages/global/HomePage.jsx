@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import '../../css/HomePage.css';
+import { Spinner } from 'react-bootstrap';
 
 // 27.11 localStorage-sse massiiv (array) ---> KOJU palju faile
 // 29.11 objekt ostukorvis ---> kogused ostukorvis iga toote juures
@@ -14,13 +15,22 @@ import '../../css/HomePage.css';
 function HomePage() {
   const [products, setProducts] = useState([]); // Kõikuvas seisundis (HTMLs)
   const [dbProducts, setDbProducts] = useState([]); // ALATI ORIGINAALSED TOOTED 481tk
+  const url = "https://rahel-react-veebipood-10-2023-default-rtdb.europe-west1.firebasedatabase.app/products.json"; 
+  const categoryUrl = "https://rahel-react-veebipood-10-2023-default-rtdb.europe-west1.firebasedatabase.app/categories.json";
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://rahel-react-veebipood-10-2023-default-rtdb.europe-west1.firebasedatabase.app/products.json")
+    fetch(url)
       .then(res => res.json())
       .then(json => {
         setProducts(json);
         setDbProducts(json);
+      })
+
+      fetch(categoryUrl)
+      .then(res => res.json())
+      .then(json => {
+        setCategories(json);
       })
   }, []);
 
@@ -66,19 +76,28 @@ function HomePage() {
     // 5. panna localStorage-sse tagasi:   localStorage.setItem(VÕTI, UUS_VÄÄRTUS)
   }
 
-  const filterByFigure = () => {
-    const result = dbProducts.filter(product => product.category.toLowerCase() === "figure");
+  // const filterByFigure = () => {
+  //   const result = dbProducts.filter(product => product.category.toLowerCase() === "figure");
+  //   setProducts(result);
+  // }
+
+  // const filterByLego = () => {
+  //   const result = dbProducts.filter(product => product.category.toLowerCase() === "lego");
+  //   setProducts(result);
+  // }
+
+  // const filterByStarWars = () => {
+  //   const result = dbProducts.filter(product => product.category.toLowerCase() === "star wars");
+  //   setProducts(result);
+  // }
+
+  const filterByCategory = (categoryClicked) => {
+    const result = dbProducts.filter(product => product.category.toLowerCase() === categoryClicked);
     setProducts(result);
   }
 
-  const filterByLego = () => {
-    const result = dbProducts.filter(product => product.category.toLowerCase() === "lego");
-    setProducts(result);
-  }
-
-  const filterByStarWars = () => {
-    const result = dbProducts.filter(product => product.category.toLowerCase() === "star wars");
-    setProducts(result);
+  if (dbProducts.length === 0 || categories.length === 0) {
+    return <Spinner />
   }
 
   return (
@@ -89,9 +108,10 @@ function HomePage() {
       <button onClick={sortZA}>Sorteeri kahanevalt</button>
       <button onClick={sortPriceAsc}>Sorteeri hinna järgi kasvavalt</button>
       <button onClick={sortPriceDesc}>Sorteeri hinna järgi kahanevalt</button>
-      <button onClick={filterByFigure}>Filtreeri "Figure" tooted</button>
+      {/* <button onClick={filterByFigure}>Filtreeri "Figure" tooted</button>
       <button onClick={filterByLego}>Filtreeri "Lego" tooted</button>
-      <button onClick={filterByStarWars}>Filtreeri "StarWars" tooted</button>
+      <button onClick={filterByStarWars}>Filtreeri "StarWars" tooted</button> */}
+      { categories.map( category => <button onClick={() => filterByCategory(category.name)}>{category.name}</button>)}
 
       <div className='products'>
         {products.map((product, index) => 

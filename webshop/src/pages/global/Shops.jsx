@@ -6,6 +6,7 @@ function Shops() {
   const [coordinaates, setCoordinates] = useState({lngLat: [59.4378, 24.7574], zoom: 11});
 
   // KODUS: Teha Helsinki ja Pärnusse ka pood juurde
+  // võtta andmebaasist kõik poed ja kuvada neid välja ning kontrollida kas click toimib (alumised 3 mapi abil andmebaasist)
   
   return (<div>
     <Button onClick={() => setCoordinates({lngLat: [58.6942, 25.9077], zoom: 6})}>Kõik poed</Button>

@@ -1,12 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import productsFromFile from '../../data/products.json'
+//import productsFromFile from '../../data/products.json'
 import { ToastContainer, toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next';
 
 function EditProduct() {
   const { product_id } = useParams();
-  const found = productsFromFile.find(product => product.id === Number(product_id));
+  const [dbProducts, setDbProducts] = useState([]); 
+  const found = dbProducts.find(product => product.id === Number(product_id));
   const idRef = useRef();
   const nameRef = useRef();
   const priceRef = useRef();
@@ -17,6 +18,15 @@ function EditProduct() {
   const navigate = useNavigate();
   const [idUnique, setIdUnique] = useState(true);
   const { t } = useTranslation();
+  const url = "https://rahel-react-veebipood-10-2023-default-rtdb.europe-west1.firebasedatabase.app/products.json"; 
+
+  useEffect(() => {
+    fetch(url)
+      .then(res => res.json())
+      .then(json => {
+        setDbProducts(json);
+      })
+  }, []);
   
   
   const edit = () => {
@@ -46,21 +56,22 @@ function EditProduct() {
       return;
     }
 
-    const index = productsFromFile.findIndex(product => product.id === Number(product_id));
-    productsFromFile[index] = {
+    const index = dbProducts.findIndex(product => product.id === Number(product_id));
+    dbProducts[index] = {
       "id": Number(idRef.current.value),
       "image": imageRef.current.value,
       "name": nameRef.current.value,
       "price": Number(priceRef.current.value),
       "description": descriptionRef.current.value,
       "category": categoryRef.current.value,
-      "active": activeRef.current.value.checked
+      "active": activeRef.current.checked
     }
-    navigate("/admin/products");
+    fetch(url, {"method": "PUT", "body": JSON.stringify(dbProducts)})
+      .then(() => navigate("/admin/products"));
   }
 
   const checkIdUniqueness = () => {
-    const result = productsFromFile.find(product => product.id === Number(idRef.current.value));
+    const result = dbProducts.find(product => product.id === Number(idRef.current.value));
 
     if (result === undefined) {
       setIdUnique(true);
