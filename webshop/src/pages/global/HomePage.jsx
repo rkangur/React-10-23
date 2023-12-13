@@ -92,7 +92,7 @@ function HomePage() {
   // }
 
   const filterByCategory = (categoryClicked) => {
-    const result = dbProducts.filter(product => product.category.toLowerCase() === categoryClicked);
+    const result = dbProducts.filter(product => product.category === categoryClicked);
     setProducts(result);
   }
 
@@ -111,8 +111,11 @@ function HomePage() {
       {/* <button onClick={filterByFigure}>Filtreeri "Figure" tooted</button>
       <button onClick={filterByLego}>Filtreeri "Lego" tooted</button>
       <button onClick={filterByStarWars}>Filtreeri "StarWars" tooted</button> */}
-      { categories.map( category => <button onClick={() => filterByCategory(category.name)}>{category.name}</button>)}
-
+      <select onChange={e => filterByCategory(e.target.value)}>{ categories
+                  .map( category => 
+                  <option key={category.name} value={category.value}>{category.name}</option>
+                  )}</select>
+      
       <div className='products'>
         {products.map((product, index) => 
         <div key={product.id} className='home-product'>

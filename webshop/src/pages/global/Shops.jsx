@@ -31,9 +31,9 @@ function Shops() {
     {coordinatesDb.map(coordinate => 
         <div>
           <div>Poe nimi: {coordinate.name}</div> 
-          <div>Poe asukoht: {coordinate.address}</div>
-          <div>Poe lahtioleku ajad: {coordinate.opentime}</div> 
-          <div>Poe veebileht: {coordinate.urlShop}</div> <br />
+          <div>Asukoht: {coordinate.address}</div>
+          <div>Lahtioleku aeg: {coordinate.opentime}</div> 
+          <div>Veebileht: {coordinate.urlShop}</div> <br />
         </div>)}
     </div>
   </div>)
