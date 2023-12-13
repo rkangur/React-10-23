@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import ChangeView from './ChangeView';
+import { useEffect, useState } from 'react';
 let DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow,
@@ -13,8 +14,16 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 function Map(props) { 
+  const [shopsDb, setShopsDb] = useState([]);
 
   // VÕTTA ANDMEBAASIST KÕIK POED ja markeris automaatselt
+  useEffect(() => {
+    fetch('https://raheli-veebipood-default-rtdb.europe-west1.firebasedatabase.app/shops.json')
+      .then(response => response.json())
+      .then(json => {
+        setShopsDb(json || []);
+      })
+  }, []);
 
   return (
   <div>
@@ -25,7 +34,7 @@ function Map(props) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[59.4218, 24.7936]}>
+      {/* <Marker position={[59.4218, 24.7936]}>
         <Popup>
           Ülemiste keskus. <br /> Avatud 9-20
         </Popup>
@@ -39,7 +48,16 @@ function Map(props) {
         <Popup>
           Tasku keskus. <br /> Avatud 10-21
         </Popup>
+      </Marker> */}
+
+      {shopsDb.map(shop => 
+        <Marker position={[shop.latitude, shop.longitude]}>
+        <Popup>
+          {shop.name} <br /> {shop.opentime}
+        </Popup>
       </Marker>
+        )}
+
     </MapContainer>
   </div>)
 }
