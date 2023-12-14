@@ -6,7 +6,16 @@ const CartSumContext = createContext();
 
 // Create a provider component
 const CartSumProvider = ({ children }) => {
-  const [cartSum, setCartSum] = useState('light');
+    // cartSum --> kasutab NavigationBar
+    // setCartSum --> muudab ainult Cart ja Homepage
+  const [cartSum, setCartSum] = useState(calculateCartSum());
+
+  function calculateCartSum() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let sum = 0;
+    cart.forEach(product => sum += product.toode.price * product.kogus)
+    return sum.toFixed(2);
+  }
 
   return (
     <CartSumContext.Provider value={{ cartSum, setCartSum }}>

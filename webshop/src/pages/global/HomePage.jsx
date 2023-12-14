@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import styles from '../../css/HomePage.module.css';
 import { Spinner } from 'react-bootstrap';
 import SortButtons from '../../components/home/SortButtons';
+import { useCartSum } from '../../store/CartSumContext';
 
 // 27.11 localStorage-sse massiiv (array) ---> KOJU palju faile
 // 29.11 objekt ostukorvis ---> kogused ostukorvis iga toote juures
@@ -19,6 +20,7 @@ function HomePage() {
   const url = "https://rahel-react-veebipood-10-2023-default-rtdb.europe-west1.firebasedatabase.app/products.json"; 
   const categoryUrl = "https://rahel-react-veebipood-10-2023-default-rtdb.europe-west1.firebasedatabase.app/categories.json";
   const [categories, setCategories] = useState([]);
+  const { setCartSum } = useCartSum();
 
   useEffect(() => {
     fetch(url)
@@ -36,41 +38,19 @@ function HomePage() {
   }, []);
 
   const addToCart = (product) => {
-    // NB! LocalStorage'st tuleb alati sõne sp JSON.parse muudab array-ks
-    // JSON.parse võtab jutumärgid ära: "[{},{}]" ---> [{},{}]
     const cartFromLS = JSON.parse(localStorage.getItem("cart")) || [];
     const index = cartFromLS.findIndex(cartProduct => cartProduct.toode.id === product.id);
 
-    // kui ei leita, on jrk nr -1
     if (index >= 0) {
       cartFromLS[index].kogus += 1;
     } else {
       cartFromLS.push({"kogus": 1, "toode": product});
     }
     localStorage.setItem("cart", JSON.stringify(cartFromLS));
-
-    // localStorage-sse pannes:
-    // 1. võtta localStorage-st:   localStorage.getItem(VÕTI) || []
-    // 2. võtta jutumärgid maha:   JSON.parse()
-    // 3. lisada localStorage-st võetule üks juurde:    .push(UUS_ASI)
-    // 4. panna jutumärgid tagasi: JSON.stringify()
-    // 5. panna localStorage-sse tagasi:   localStorage.setItem(VÕTI, UUS_VÄÄRTUS)
+    let sum = 0;
+    cartFromLS.forEach(product => sum += product.toode.price * product.kogus)
+    setCartSum(sum.toFixed(2));
   }
-
-  // const filterByFigure = () => {
-  //   const result = dbProducts.filter(product => product.category.toLowerCase() === "figure");
-  //   setProducts(result);
-  // }
-
-  // const filterByLego = () => {
-  //   const result = dbProducts.filter(product => product.category.toLowerCase() === "lego");
-  //   setProducts(result);
-  // }
-
-  // const filterByStarWars = () => {
-  //   const result = dbProducts.filter(product => product.category.toLowerCase() === "star wars");
-  //   setProducts(result);
-  // }
 
   const filterByCategory = (categoryClicked) => {
     const result = dbProducts.filter(product => product.category === categoryClicked);
@@ -88,10 +68,6 @@ function HomePage() {
         products={products}
         setProducts={setProducts}
       />
-
-      {/* <button onClick={filterByFigure}>Filtreeri "Figure" tooted</button>
-      <button onClick={filterByLego}>Filtreeri "Lego" tooted</button>
-      <button onClick={filterByStarWars}>Filtreeri "StarWars" tooted</button> */}
       <select onChange={e => filterByCategory(e.target.value)}>{ categories
                   .map( category => 
                   <option key={category.name} value={category.value}>{category.name}</option>
