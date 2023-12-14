@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import '../../css/HomePage.css';
+import styles from '../../css/HomePage.module.css';
 import { Spinner } from 'react-bootstrap';
+import SortButtons from '../../components/home/SortButtons';
 
 // 27.11 localStorage-sse massiiv (array) ---> KOJU palju faile
 // 29.11 objekt ostukorvis ---> kogused ostukorvis iga toote juures
 //       kujundus ostukorvis
 // 02.12 API päringud -> pakiautomaatide võtmine ---> KOJU mõni fail
 // 06.12 andmebaasi kõik meie kategooriad, tooted, poed jne... ---> Nortali proovitöö
-// 17.12 Alamkomponendid, CSS moodulid, Context, proovitöö vaatlus ---> veel mõned proovitööd
+// 17.12 Alamkomponendid (components, props), CSS moodulid, Context, proovitöö vaatlus ---> veel mõned proovitööd
 // 21.12 Lõpuprojekti esitlemine 1.5h
 
 function HomePage() {
@@ -33,26 +34,6 @@ function HomePage() {
         setCategories(json);
       })
   }, []);
-
-  const sortAZ = () => {
-    products.sort((a, b) => a.name.localeCompare(b.name));
-    setProducts(products.slice());
-  }
-
-  const sortZA = () => {
-    products.sort((a, b) => b.name.localeCompare(a.name));
-    setProducts(products.slice());
-  }
-
-  const sortPriceAsc = () => {
-    products.sort((a, b) => a.price - b.price);
-    setProducts(products.slice());
-  }
-
-  const sortPriceDesc = (a,b) => {
-    products.sort((a,b) => b.price - a.price);
-    setProducts(products.slice());
-  }
 
   const addToCart = (product) => {
     // NB! LocalStorage'st tuleb alati sõne sp JSON.parse muudab array-ks
@@ -103,11 +84,11 @@ function HomePage() {
   return (
     <div>
       <div>Toodete arv: {products.length} tk</div>
+      <SortButtons 
+        products={products}
+        setProducts={setProducts}
+      />
 
-      <button onClick={sortAZ}>Sorteeri kasvavalt</button>
-      <button onClick={sortZA}>Sorteeri kahanevalt</button>
-      <button onClick={sortPriceAsc}>Sorteeri hinna järgi kasvavalt</button>
-      <button onClick={sortPriceDesc}>Sorteeri hinna järgi kahanevalt</button>
       {/* <button onClick={filterByFigure}>Filtreeri "Figure" tooted</button>
       <button onClick={filterByLego}>Filtreeri "Lego" tooted</button>
       <button onClick={filterByStarWars}>Filtreeri "StarWars" tooted</button> */}
@@ -116,12 +97,12 @@ function HomePage() {
                   <option key={category.name} value={category.value}>{category.name}</option>
                   )}</select>
       
-      <div className='products'>
+      <div className={styles.products}>
         {products.map((product, index) => 
-        <div key={product.id} className='home-product'>
-          <img className='home-image' src={product.image} alt="" />
+        <div key={product.id} className={styles.product}>
+          <img className={styles.image} src={product.image} alt="" />
           <div>{product.id}</div>
-          <div className='home-productName'>{product.name}</div>
+          <div className={styles.name}>{product.name}</div>
           <div>{product.price}</div>
         
           <Link to={"/product/" + product.id}>
