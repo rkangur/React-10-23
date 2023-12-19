@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 function NotFound() {
   return (
-    <div>
-        <img src='/person.png' alt='404 Not Found'/> <br />
-        <div>Thank you for your patience.</div>
-        <div> Please write us <Link to='/contact'>here</Link> how we can be of further assistance for You!</div>
+    <div className='formContainer'>
+        <img className='imageBcground' src='/person.png' alt='404 Not Found' height="auto" width="40%" id="image-section"/> <br />
+        <p>Thank you for your patience.</p>
+        <p> Please write us <Link to='/contact'>here</Link> how we can be of further assistance for you!</p>
     </div>
   )
 }

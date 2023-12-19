@@ -3,7 +3,7 @@ import React from 'react'
 function HomePage() {
   return (
     <div>
-        <img src='/tiger.jpg' alt=''/>
+        <img className='imageBcground' src='/tiger.jpg' alt='' height="auto" width="80%" id="image-section"/>
     </div>
   )
 }

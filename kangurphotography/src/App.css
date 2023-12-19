@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: rgb(228, 220, 220);
+  background-color: rgb(214, 210, 210);
   font-family: 'Merriweather', serif;
 }
 
@@ -17,4 +17,77 @@
 
 .image:active {
   padding: 1px;
+}
+
+p {
+  margin: 30px 3%;
+  font-weight: bold;
+  padding: auto;
+  color: grey;
+}
+
+h4 {
+  color: #2c4053;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+h5 {
+  color: #2c4a7a;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.links {
+  display: flex;
+	flex-direction: row;
+	justify-content: center;
+  width: 100%;
+}
+
+.lang {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+.lang:hover {
+  opacity: 70%;
+  cursor: pointer;
+}
+
+.lang:active {
+  padding: 1px;
+}
+
+.navBar {
+  background-image: linear-gradient(to bottom,#4b8ac5 0,#2c4053 100%) !important;
+}
+
+.formContainer {
+  background-color: rgb(201, 197, 192);
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.TheoFoto {
+  width: 300px;
+  border-radius: 60%;
+  margin: 40px;
+  box-shadow: 0 0 30px rgb(44, 117, 117);
+}
+
+.imageBcground {
+  @media screen and (max-width: 320px){
+    #image-section{
+        width: 100%;
+        height: auto;
+      };
+    } 
 }
