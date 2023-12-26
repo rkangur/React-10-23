@@ -1,9 +1,11 @@
 import React, { useRef } from 'react'
 import { TextField, Button } from '@mui/material';
 import emailjs from '@emailjs/browser';
+import { useTranslation } from 'react-i18next';
 
 const ContactUs = () => {
   const form = useRef();
+  const { t, i18n } = useTranslation();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -18,16 +20,16 @@ const ContactUs = () => {
 
   return (
     <div>
-        <h4>Thank you for visiting our website!</h4> <br />
+        <h4>{t("thankYou")}</h4> <br />
         <div className='formContainer'>
-          <h5>Get in touch</h5><br />
+          <h5>{t("getInTouch")}</h5><br />
           <form ref={form} onSubmit={sendEmail}>
-            <TextField name="from_name" label="Name" variant="standard" /> <br /> <br />
+            <TextField name="from_name" label={t("name")} variant="standard" /> <br /> <br />
             <TextField required name="from_email" id="filled-required"
-            label="Email" variant="standard" /> <br /> <br />
+            label={t("email")} variant="standard" /> <br /> <br />
             <TextField required id="filled-required"
-            label="Message" name="message" variant="standard" multiline rows={4} /> <br /> <br />
-            <Button type="submit" variant="contained">Send</Button> < br/> <br />
+            label={t("message")} name="message" variant="standard" multiline rows={4} /> <br /> <br />
+            <Button type="submit" variant="contained">{t("send")}</Button> < br/> <br />
           </form>
         </div>
     </div>

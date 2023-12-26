@@ -1,11 +1,14 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 
 function About() {
+  const { t, i18n } = useTranslation();
+
   return (
     <div>
         <img src="./Theo.jpg" className='TheoFoto' alt="Theo foto"/>
         <div className='formContainer'>
-          <h5>Meet Theodor Kangur, a seasoned photographer with a keen eye for the beauty that surrounds us.</h5>
+          <h5>{t("heading1")}</h5>
             <p>The man behind the lens is not just a photographer; he is an artist who brings a unique perspective to every photograph he takes. Born with a love for nature and animals,
               Theodor's journey into the world of photography was a natural progression. His ability to connect with his subjects, whether they be the vibrant flora and fauna of the natural world or 
               the dynamic emotions of people at events, has made him a sought-after photographer.</p>

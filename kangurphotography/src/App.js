@@ -9,8 +9,20 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Footer from "./pages/Footer.js";
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { t, i18n } = useTranslation();
+
+  const changeLangEn = () => {
+    i18n.changeLanguage("en");
+    localStorage.setItem("language", "en");
+  }
+
+  const changeLangEe = () => {
+    i18n.changeLanguage("ee");
+    localStorage.setItem("language", "ee");
+  }
 
   return (
     <div className="App">
@@ -24,14 +36,14 @@ function App() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto"> 
-                <Nav.Link as={Link} to="/about">About</Nav.Link>
-                <Nav.Link as={Link} to="/portfolio">Portfolio</Nav.Link>
-                <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+                <Nav.Link as={Link} to="/about">{t("nav.about")}</Nav.Link>
+                <Nav.Link as={Link} to="/portfolio">{t("nav.portfolio")}</Nav.Link>
+                <Nav.Link as={Link} to="/contact">{t("nav.contact")}</Nav.Link>
               </Nav>
             </Navbar.Collapse>
               <Nav>
-                  <img className='lang' src="/estonia.png" alt="" />
-                  <img className='lang' src="/united-kingdom.png" alt="" />
+                  <img className='lang' src="/estonia.png" alt="" onClick={changeLangEe}/>
+                  <img className='lang' src="/united-kingdom.png" alt="" onClick={changeLangEn}/>
               </Nav>
           </Container>
         </Navbar>
