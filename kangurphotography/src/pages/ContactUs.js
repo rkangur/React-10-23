@@ -1,11 +1,17 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { TextField, Button } from '@mui/material';
 import emailjs from '@emailjs/browser';
 import { useTranslation } from 'react-i18next';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactUs = () => {
   const form = useRef();
-  const { t, i18n } = useTranslation();
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const messageRef = useRef();
+  const { t } = useTranslation();
+  const [btnClicked, setBtnClicked] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -18,19 +24,26 @@ const ContactUs = () => {
       });
   };
 
+  const btnIsClicked = () => {
+    nameRef.current.value = "";
+    emailRef.current.value = "";
+    messageRef.current.value = "";
+    setBtnClicked(true);
+  }
+
   return (
     <div>
-        <h4>{t("thankYou")}</h4> <br />
+        { (btnClicked === false) ? <div><h5>{t("getInTouch")}</h5></div> : <div><h4>{t("thankYou")}</h4> <br /> </div>}
         <div className='formContainer'>
-          <h5>{t("getInTouch")}</h5><br />
           <form ref={form} onSubmit={sendEmail}>
-            <TextField name="from_name" label={t("name")} variant="standard" /> <br /> <br />
-            <TextField required name="from_email" id="filled-required"
-            label={t("email")} variant="standard" /> <br /> <br />
-            <TextField required id="filled-required"
+            <TextField name="from_name" label={t("name")} inputRef={nameRef} variant="standard" /> <br /> <br />
+            <TextField required name="from_email" inputRef={emailRef} id="filled-required"
+            label={t("email")} variant="standard" />  <br /> <br />
+            <TextField required inputRef={messageRef} id="filled-required"
             label={t("message")} name="message" variant="standard" multiline rows={4} /> <br /> <br />
-            <Button type="submit" variant="contained">{t("send")}</Button> < br/> <br />
+            <Button type="submit" variant="contained" onClick={() => btnIsClicked()}>{t("send")}</Button> < br/> <br />
           </form>
+          <ToastContainer />
         </div>
     </div>
   )

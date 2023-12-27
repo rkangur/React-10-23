@@ -59,7 +59,7 @@ function Portfolio() {
 
   return (
     <div className='links'>
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+    <Box sx={{ maxWidth: 600, flexGrow: 1 }}>
       <Paper
         square
         elevation={0}
@@ -68,7 +68,7 @@ function Portfolio() {
           alignItems: 'center',
           height: 50,
           pl: 2,
-          bgcolor: 'background.default',
+          bgcolor: 'whitesmoke',
         }}
       >
         <Typography>{images[activeStep].label}</Typography>
@@ -78,7 +78,6 @@ function Portfolio() {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-        
       >
         {images.map((step, index) => (
           <div key={step.label}>
@@ -86,11 +85,11 @@ function Portfolio() {
               <Box
                 component="img"
                 sx={{
-                  height: 255,
+                  height: 400,
                   display: 'block',
-                  maxWidth: 400,
+                  maxWidth: 600,
                   overflow: 'hidden',
-                  width: '100%',
+                  width: '100%'
                 }}
                 src={step.imgPath}
                 alt={step.label}
@@ -99,32 +98,31 @@ function Portfolio() {
           </div>
         ))}
       </AutoPlaySwipeableViews>
-      <MobileStepper
+      <MobileStepper sx={{ bgcolor: 'transparent' }}
         steps={maxSteps}
         position="static"
         activeStep={activeStep}
+
         nextButton={
           <Button
             size="small"
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
           >
-            Next
-            {theme.direction === 'rtl' ? (
+            {/* {theme.direction === 'rtl' ? (
               <KeyboardArrowLeft />
             ) : (
               <KeyboardArrowRight />
-            )}
+            )} */}
           </Button>
         }
         backButton={
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
+            {/* {theme.direction === 'rtl' ? (
               <KeyboardArrowRight />
             ) : (
               <KeyboardArrowLeft />
-            )}
-            Back
+            )} */}
           </Button>
         }
       />

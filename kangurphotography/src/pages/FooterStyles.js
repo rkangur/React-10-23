@@ -17,6 +17,7 @@ export const FooterContainer = styled.div`
 	justify-content: center;
 	max-width: 1000px;
 	margin: 0 auto;
+	margin-bottom: 0px;
 `;
 
 export const Column = styled.div`
