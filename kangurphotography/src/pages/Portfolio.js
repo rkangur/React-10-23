@@ -14,30 +14,25 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
   {
-    label: 'Tallinn',
     imgPath:
       './Tallinn.jpg',
   },
   {
-    label: 'London',
-    imgPath:
-      '',
-  },
-  {
-    label: 'Aurora Borealis',
     imgPath:
       './virmalised.jpg',
   },
   {
-    label: 'Irish setters',
+    imgPath:
+      './Tartu.jpg',
+  },
+  {
     imgPath:
       './setterid.jpg',
   },
   {
-    label: 'Nature',
     imgPath:
-      './luik.jpg',
-  },
+      './cityLights.jpg',
+  }
 ];
 
 function Portfolio() {

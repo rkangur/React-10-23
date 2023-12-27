@@ -20,7 +20,7 @@ const resources = {
       "paragraf4" : "Contact Kangur Photography today to discuss your photography needs and let us turn your moments into timeless works of art.",
       "heading2" : "Photographic Expertise",
       "heading3" : "Experience the Difference",
-      "toastMessage" : "Field is required!"
+      "toastMessage" : "Email field is required!"
     }
   },
   ee: {
@@ -35,13 +35,13 @@ const resources = {
         "getInTouch" : "Võtke meiega ühendust:",
         "thankYou" : "Täname!",
         "heading1" : "Theodor Kangur - kogenud fotograaf, kes jäädvustab meid ümbritsevat ilu.",
-        "heading2" : "Fotograafia",
-        "heading3" : "Märgake erinevust",
+        "heading2" : "Meie visioon",
+        "heading3" : "Fotode kvaliteet",
         "paragraf1" : "Objektiivi taga olev mees ei ole ainult fotograaf; ta on kunstnik, kes toob igale tehtud fotole ainulaadse vaatenurga. Armastusega looduse ja loomade vastu oli Theodori teekond fotograafiamaailma loomulik. Tema võime luua sidet oma pildistatavatega, olgu need siis loodusmaailma elava taimestiku ja loomastiku või inimeste emotsioonid sündmustel, on teinud temast nõutud fotograafi.",
-        "paragraf2" : "Kangur Photography's oleme spetsialiseerunud looduse olemuse jäädvustamisele. Theodori sügav side keskkonnaga võimaldab tal hetked ajas külmutada, näidates ümbritseva maailma ilu. Alates hingematvatest maastikest kuni metsloomade käitumise peente nüanssideni; iga pilt jutustab lugu. Lisaks loodusfotograafiale toob Theodor oma asjatundlikkuse sündmustesse, luues nii üksikisikutele kui ka peredele ajatuid mälestusi. Olgu see pidu või firmaüritus, Kangur Photography tagab, et iga oluline hetk säilib kunstilise hõnguga.",
-        "paragraf3" : "Kangur Photography valimine tähendab fotograafi valimist, kes pole mitte ainult osav, vaid ka kirglik hetkede jäädvustamise kunsti vastu. Kui otsite looduse ilu, sündmuste energiat, inimeste soojust või kinnisvara visuaalset atraktiivsust, Theodor Kangur on pühendunud maagiliste piltide pakkumisele.",
+        "paragraf2" : "Kangur Photography's oleme spetsialiseerunud looduse olemuse jäädvustamisele. Alates hingematvatest maastikest kuni loomade käitumise peente nüanssideni; iga pilt jutustab lugu. Lisaks loodusfotograafiale toob Theodor oma asjatundlikkuse sündmustesse, luues nii üksikisikutele kui ka peredele ajatuid mälestusi. Olgu see pidu või firmaüritus, Kangur Photography tagab, et iga oluline hetk säilib kunstilise hõnguga.",
+        "paragraf3" : "Kangur Photography valimine tähendab fotograafi valimist, kes pole mitte ainult osav, vaid ka kirglik hetkede jäädvustamise kunsti vastu. Kui otsite looduse ilu, sündmuste energiat, inimeste soojust või kinnisvara visuaalset atraktiivsust, Theodor Kangur on pühendunud maagiliste piltide loomisele.",
         "paragraf4" : "Võtke ühendust Kangur Photography'ga juba täna, et arutada oma fotograafiavajadusi ja lasta meil muuta teie hetked ajatuteks kunstiteosteks.",
-        "toastMessage" : "Palun täitke väli!"
+        "toastMessage" : "Palun täitke meiliaadressi väli!"
     }
   }
 };
