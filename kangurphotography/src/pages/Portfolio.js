@@ -31,12 +31,12 @@ const images = [
   {
     label: 'Irish setters',
     imgPath:
-      '',
+      './setterid.jpg',
   },
   {
     label: 'Nature',
     imgPath:
-      '',
+      './luik.jpg',
   },
 ];
 

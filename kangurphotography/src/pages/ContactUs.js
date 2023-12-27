@@ -25,21 +25,26 @@ const ContactUs = () => {
   };
 
   const btnIsClicked = () => {
-    nameRef.current.value = "";
-    emailRef.current.value = "";
-    messageRef.current.value = "";
-    setBtnClicked(true);
+    if (emailRef.current.value === "") {
+      toast(t("toastMessage"));
+    } 
+    else {
+      nameRef.current.value = "";
+      emailRef.current.value = "";
+      messageRef.current.value = "";
+      setBtnClicked(true);
+    }  
   }
 
   return (
     <div>
-        { (btnClicked === false) ? <div><h5>{t("getInTouch")}</h5></div> : <div><h4>{t("thankYou")}</h4> <br /> </div>}
+        { (btnClicked === false) ? <div><h5>{t("getInTouch")}</h5></div> :<div><h4>{t("thankYou")}</h4></div> }
         <div className='formContainer'>
           <form ref={form} onSubmit={sendEmail}>
             <TextField name="from_name" label={t("name")} inputRef={nameRef} variant="standard" /> <br /> <br />
-            <TextField required name="from_email" inputRef={emailRef} id="filled-required"
-            label={t("email")} variant="standard" />  <br /> <br />
-            <TextField required inputRef={messageRef} id="filled-required"
+            <TextField name="from_email" inputRef={emailRef} id="filled"
+            label={t("email*")} variant="standard" /> <br /> <br />
+            <TextField inputRef={messageRef} id="filled"
             label={t("message")} name="message" variant="standard" multiline rows={4} /> <br /> <br />
             <Button type="submit" variant="contained" onClick={() => btnIsClicked()}>{t("send")}</Button> < br/> <br />
           </form>
