@@ -47,6 +47,7 @@ function App() {
               </Nav>
           </Container>
         </Navbar>
+        
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/portfolio' element={<Portfolio/>}/>

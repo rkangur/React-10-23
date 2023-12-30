@@ -61,5 +61,3 @@ export const Heading = styled.p`
 	margin-bottom: 20px;
 	font-weight: bold;
 `;
-
-
